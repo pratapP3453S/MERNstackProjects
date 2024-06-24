@@ -5,13 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
-  theme: {
-    extend: {},
-  },
+  // theme: {
+  //   extend: {},
+  // },
   daisyui: {
     themes: ["light", "dark", "cupcake"],
   },
   plugins: [
+    // require('@tailwindcss/forms'),
     require('daisyui'),
-    require('@tailwindcss/forms'),
   ],}

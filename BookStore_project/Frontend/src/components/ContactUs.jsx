@@ -15,6 +15,8 @@
 import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Field, Label, Switch } from '@headlessui/react'
+import Footer from './Footer'
+import Navbar from './Navbar'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -24,6 +26,8 @@ function ContactUs() {
   const [agreed, setAgreed] = useState(false)
 
   return (
+    <>
+    <Navbar />
     <div className={`isolate bg-white px-6 py-24 sm:py-32 lg:px-8`}>
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -186,6 +190,8 @@ function ContactUs() {
         </div>
       </form>
     </div>
+    <Footer />
+    </>
   )
 }
 export default ContactUs

@@ -3,10 +3,14 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ThemeContext } from './Theme-context';
 import Login from './Login';
+import { useAuth } from '../context/Authorization-context';
+import Logout from './Logout';
 
 function Navbar() {
 
     const {theme, setTheme} = useContext(ThemeContext);
+    const [authUser, setAuthUser] = useAuth();
+    // console.log(authUser);
 
     // const [theme, setTheme] = (localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
     // const element = document.documentElement;
@@ -89,10 +93,12 @@ function Navbar() {
 
                         </label>
                     </div>
-                    <div>
-                        <a className="bg-black text-white px-5 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer" onClick={()=> document.getElementById('my_modal_3').showModal()}>Login</a>
-                        <Login />
-                    </div>
+                    {authUser ? <Logout /> :
+                <div>
+                    <a className="bg-black text-white px-5 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer" onClick={() => document.getElementById('my_modal_3').showModal()}>Login</a>
+                    <Login />
+                </div>
+            }
                 </div>
             </div>
         </div>
