@@ -32,16 +32,12 @@ export const newOrder = (order) => async (dispatch) => {
 
     const token = Cookies.get("token");
 
-    const response = await axios.post(
-      "https://flipkart-pgmw.onrender.com/api/v1/order/new",
-      order,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
+    const response = await axios.post("/api/v1/order/new", order, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     dispatch({
       type: NEW_ORDER_SUCCESS,
       payload: response.data,
@@ -61,7 +57,7 @@ export const myOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get("https://flipkart-pgmw.onrender.com/api/v1/orders/me", {
+    const { data } = await axios.get("/api/v1/orders/me", {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -86,15 +82,12 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get(
-      `https://flipkart-pgmw.onrender.com/api/v1/order/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.get(`/api/v1/order/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -113,15 +106,12 @@ export const getPaymentStatus = (id) => async (dispatch) => {
   try {
     dispatch({ type: PAYMENT_STATUS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get(
-      `https://flipkart-pgmw.onrender.com/api/v1/payment/status/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.get(`/api/v1/payment/status/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
     dispatch({
       type: PAYMENT_STATUS_SUCCESS,
@@ -140,15 +130,12 @@ export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get(
-      "https://flipkart-pgmw.onrender.com/api/v1/admin/orders",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.get("/api/v1/admin/orders", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
     dispatch({
       type: ALL_ORDERS_SUCCESS,
@@ -167,16 +154,12 @@ export const updateOrder = (id, order) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ORDER_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.put(
-      `https://flipkart-pgmw.onrender.com/api/v1/admin/order/${id}`,
-      order,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.put(`/api/v1/admin/order/${id}`, order, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
     dispatch({
       type: UPDATE_ORDER_SUCCESS,
@@ -195,15 +178,12 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.delete(
-      `https://flipkart-pgmw.onrender.com/api/v1/admin/order/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.delete(`/api/v1/admin/order/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
     dispatch({
       type: DELETE_ORDER_SUCCESS,

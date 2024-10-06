@@ -48,7 +48,7 @@ export const registerUser = (userData) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "https://flipkart-pgmw.onrender.com/api/v1/register",
+      "/api/v1/register",
       userData,
       config
     );
@@ -77,7 +77,8 @@ export const loginUser = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "https://flipkart-pgmw.onrender.com/api/v1/login",
+      // "/api/v1/login",
+      "/api/v1/login",
       { email, password },
       config
     );
@@ -105,7 +106,7 @@ export const logoutUser = () => async (dispatch) => {
   try {
     // console.log("Logging out user...");
     const response = await axios.get(
-      "https://flipkart-pgmw.onrender.com/api/v1/logout"
+      "/api/v1/logout"
     );
     console.log("Logout successful.",response);
     dispatch({ type: LOGOUT_USER_SUCCESS });
@@ -130,7 +131,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      "https://flipkart-pgmw.onrender.com/api/v1/me/update",
+      "/api/v1/me/update",
       userData,
       config
     );
@@ -159,7 +160,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      "https://flipkart-pgmw.onrender.com/api/v1/password/update",
+      "/api/v1/password/update",
       passwords,
       config
     );
@@ -188,7 +189,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "https://flipkart-pgmw.onrender.com/api/v1/password/forgot",
+      "/api/v1/password/forgot",
       email,
       config
     );
@@ -217,7 +218,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `https://flipkart-pgmw.onrender.com/api/v1/password/reset/${token}`,
+      `/api/v1/password/reset/${token}`,
       passwords,
       config
     );
@@ -239,7 +240,7 @@ export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_USERS_REQUEST });
     const { data } = await axios.get(
-      "https://flipkart-pgmw.onrender.com/api/v1/admin/users"
+      "/api/v1/admin/users"
     );
     dispatch({
       type: ALL_USERS_SUCCESS,
@@ -265,7 +266,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `https://flipkart-pgmw.onrender.com/api/v1/admin/user/${id}`,
+      `/api/v1/admin/user/${id}`,
       userData,
       config
     );
@@ -287,7 +288,7 @@ export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_USER_REQUEST });
     const { data } = await axios.delete(
-      `https://flipkart-pgmw.onrender.com/api/v1/admin/user/${id}`
+      `/api/v1/admin/user/${id}`
     );
 
     dispatch({

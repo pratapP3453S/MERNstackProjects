@@ -1,6 +1,6 @@
 const {Products} = require("./Constant/product.js");
-const {Product} = require("./Models/product.schema.js");
-const defaultData = async ()=>{
+const {Product} = require("./Models/product.model.js");
+const defaultData = async () =>{
     try {  
          await Product.deleteMany({})
          await Product.insertMany(Products);

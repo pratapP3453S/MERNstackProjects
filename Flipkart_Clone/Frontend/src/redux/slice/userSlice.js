@@ -78,3 +78,4 @@ export const loading = (state) => state.user.loading;
 export const loggedInUser = (state) => state.user.loggedInUser;
 
 export default userSlice.reducer;
+

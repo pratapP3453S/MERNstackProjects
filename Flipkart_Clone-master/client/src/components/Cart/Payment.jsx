@@ -46,7 +46,7 @@ const Payment = ({ stripeApiKey }) => {
     };
 
     try {
-      const response = await fetch("https://flipkart-pgmw.onrender.com/api/v1/checkout", {
+      const response = await fetch("/api/v1/checkout", {
         method: "POST",
         headers: headers,
         body: JSON.stringify(body),
@@ -114,11 +114,10 @@ const Payment = ({ stripeApiKey }) => {
                 </RadioGroup>
               </FormControl>
               <button
-                className={`btn btn-success ${
-                  payDisable
+                className={`btn btn-success ${payDisable
                     ? "bg-primary-grey cursor-not-allowed"
                     : "bg-primary-orange cursor-pointer"
-                } w-1/2 sm:w-1/4 my-2 py-3 font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none`}
+                  } w-1/2 sm:w-1/4 my-2 py-3 font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none`}
                 disabled={payDisable}
                 onClick={makePayment}
                 type="button"
