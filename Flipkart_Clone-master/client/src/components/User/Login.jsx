@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, loginUser } from "../../redux/actions/user.actions";
 import { useSnackbar } from "notistack";
@@ -11,7 +11,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const location = useLocation();
 
   const { loading, isAuthenticated, isLogin, error } = useSelector(
     (state) => state.user
@@ -28,8 +27,6 @@ const Login = () => {
     dispatch(loginUser(email, password));
   };
 
-  const redirect = location.search ? location.search.split("=")[1] : "account";
-
   useEffect(() => {
     // console.log("inLogin isAuthenticated inside useEffect:", isAuthenticated);
     if (error) {
@@ -40,10 +37,10 @@ const Login = () => {
       enqueueSnackbar("Login successful!", { variant: "success" });
     }
     if (isAuthenticated) {
-      navigate(`/${redirect}`);
+      navigate(`/`);
     } 
   
-  }, [dispatch, error, isAuthenticated, redirect, navigate, enqueueSnackbar]);
+  }, [dispatch, error, isAuthenticated, navigate, enqueueSnackbar, isLogin]);
   return (
     <>
       <MetaData title="Login | Flipkart" />

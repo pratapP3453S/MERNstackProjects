@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { emptyCart } from "../../redux/actions/cart.actions";
 import {
   clearErrors,
-  getPaymentStatus,
+  // getPaymentStatus,
   newOrder,
 } from "../../redux/actions/order.actions";
 import Loader from "../Layouts/Loader";
@@ -79,7 +79,7 @@ const OrderStatus = () => {
       enqueueSnackbar(orderError, { variant: "error" });
       dispatch(clearErrors());
     }
-    dispatch(getPaymentStatus(params.id));
+    // dispatch(getPaymentStatus(params.id));
   }, [dispatch, error, orderError, params.id, enqueueSnackbar]);
 
   return <Loader />;

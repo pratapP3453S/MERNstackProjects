@@ -9,19 +9,19 @@ import PrimaryDropDownMenu from "./PrimaryDropDownMenu";
 import SecondaryDropDownMenu from "./SecondaryDropDownMenu";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loggedInUser } from "../../../redux/slice/userSlice.js";
+// import { loggedInUser, userDetails } from "../../../redux/slice/userSlice.js";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
 
 
-//   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   // console.log("There is value", user);
 
 //   const { cartItems } = useSelector((state) => state.cart);
 
   // console.log("inHeader isAuthenticated at the beginning:", isAuthenticated);
-  const user = useSelector(loggedInUser);
+  // const user = useSelector(userDetails);
 
   const [togglePrimaryDropDown, setTogglePrimaryDropDown] = useState(false);
   const [toggleSecondaryDropDown, setToggleSecondaryDropDown] = useState(false);
@@ -68,7 +68,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center justify-between ml-1 sm:ml-0 gap-0.5 sm:gap-7 relative">
-          {!user ? (
+          {isAuthenticated === false ? (
             <Link
               to="/login"
               className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer"
@@ -81,7 +81,6 @@ const Header = () => {
                 className="userDropDown px-3 sm:px-9 py-0.5 flex items-center text-white font-medium gap-1 cursor-pointer"
                 onClick={() => setTogglePrimaryDropDown(!togglePrimaryDropDown)}
               >
-                <AccountCircleIcon />
                 {user.username && user.username.split(" ", 1)}
                 <span>
                   {togglePrimaryDropDown ? (
@@ -98,22 +97,6 @@ const Header = () => {
               )}
             </div>
           )}
-                      {/* <Link
-              to="/login"
-              className="px-3 sm:px-9 py-0.5 text-blue-600 bg-white border font-medium rounded-sm cursor-pointer"
-            >
-              Login
-            </Link> */}
-
-            <Link
-            to="/cart"
-            className="flex items-center text-white font-medium gap-1 relative"
-          >
-            <span>
-              <StorefrontIcon />
-            </span>
-            Become a seller
-          </Link>
 
           <div ref={secondaryDropdownRef}>
             <span
@@ -145,10 +128,9 @@ const Header = () => {
               <div className="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border">
                 {cartItems.length}
               </div>
-              )}  */}
+            )} */}
             Cart
           </Link>
-
         </div>
         {/* <div ref={secondaryDropdownRef}>
             <span

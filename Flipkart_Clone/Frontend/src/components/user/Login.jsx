@@ -1,11 +1,14 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import BackdropLoader from "../Layouts/BackdropLoader";
 import MetaData from "../Layouts/MetaData";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loading, loggedInUser, userLoginAsync } from "../../redux/slice/userSlice.js";
+import { userLoginAsync } from "../../redux/slice/userSlice.js";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
  
@@ -17,14 +20,21 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const dispatch = useDispatch();
-  const user = useSelector(loggedInUser);
-  const load = useSelector(loading);
+  // const user = useSelector(loggedInUser);
+  // const load = useSelector(loading);
+  const { loading, isAuthenticated, isLogin, error, message } = useSelector(
+    (state) => state.user);
+
+  useEffect(()=> {
+    if(isLogin) toast.success(message);
+  }, [isLogin])
 
   return (
     <>
       <MetaData title="Login | Flipkart" />
-      {load && <BackdropLoader />} 
-       {user && <Navigate to="/"></Navigate>}
+      {loading && <BackdropLoader />} 
+      {isAuthenticated && <Navigate to={`/`}/>}
+       {/* {user && <Navigate to="/"></Navigate>} */}
       <main className="w-full mt-12 sm:pt-20 sm:mt-0">
         {/* <!-- row --> */}
         <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
@@ -45,7 +55,7 @@ const Login = () => {
               {/* <!-- input container --> */}
               <form noValidate onSubmit={handleSubmit((data) => {
                   dispatch(userLoginAsync({email: data.email, password: data.password}));
-                  reset();
+                  reset();                  
               })}>
                 <div className="flex flex-col w-full gap-4">
                   <TextField

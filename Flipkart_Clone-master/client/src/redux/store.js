@@ -26,7 +26,7 @@ import {
   newOrderReducer,
   orderDetailsReducer,
   orderReducer,
-  paymentStatusReducer,
+  // paymentStatusReducer,
 } from "./reducers/order.reducers";
 
 const reducer = combineReducers({
@@ -40,7 +40,7 @@ const reducer = combineReducers({
   saveForLater: saveForLaterReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
-  paymentStatus: paymentStatusReducer,
+  // paymentStatus: paymentStatusReducer,
   orderDetails: orderDetailsReducer,
   allOrders: allOrdersReducer,
   order: orderReducer,

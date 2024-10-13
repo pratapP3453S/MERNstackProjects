@@ -37,11 +37,11 @@ const loginUser = asyncErrorHandler(async (req, res, next) => {
   }
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
-    return next(new ErrorHandler("Invalid Email", 401));
+    return next(new ErrorHandler("Email or Password is not Valid", 401));
   }
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
-    return next(new ErrorHandler("Incorrect Password", 401));
+    return next(new ErrorHandler("Email or Password is not Valid", 401));
   }
   sendToken(user, 201, res);
 });

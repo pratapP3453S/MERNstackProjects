@@ -28,8 +28,8 @@ const registerUser = ( asyncHandler( async (req, res) => {
     })
     if (userExist){
         throw new ApiError(400, "User already registered.")
-    }
 
+    }
     const user = await User.create({
         username, email, password
     })
@@ -39,9 +39,19 @@ const registerUser = ( asyncHandler( async (req, res) => {
         throw new ApiError(500, "Something went wrong while registering the user")
     }
 
-    return res.status(201).json(
-        new ApiResponse(200, createdUser, "user registered successfully.")
+    const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(user._id);
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res.status(200).cookie("accessToken", accessToken, options).cookie("refreshToken", refreshToken, options).json(
+        new ApiResponse(200, createdUser, "user registered successfully")
     )
+    // return res.status(200).json(
+    //     new ApiResponse(200, createdUser, "User registered successfully")
+    // );
 }))
 
 const loginUser = ( asyncHandler( async (req, res)=> {
@@ -96,12 +106,11 @@ const logoutUser = (asyncHandler( async(req, res) => {
     return res.status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, null, "User logged Out"))
+    .json(new ApiResponse(200, {}, "User logged Out"))
 }))
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
-
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
     if (!incomingRefreshToken) {
         throw new ApiError(401, "unauthorized request")
     }

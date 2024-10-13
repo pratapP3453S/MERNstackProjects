@@ -27,7 +27,7 @@ app.use(cors());
 app.use("/api/v1", userRouter);
 app.use("/api/v1", productRouter);
 app.use("/api/v1", orderRouter);
-app.use("/api/v1", paymentRouter);
+// app.use("/api/v1", paymentRouter);
 Connection();
 
 if (process.env.NODE_ENV === "production") {

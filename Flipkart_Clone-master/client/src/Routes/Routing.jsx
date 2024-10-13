@@ -20,7 +20,7 @@ import Products from "../components/Products/Products";
 import Cart from "../components/Cart/Cart";
 import Shipping from "../components/Cart/Shipping";
 import OrderConfirm from "../components/Cart/OrderConfirm";
-import Payment from "../components/Cart/Payment";
+// import Payment from "../components/Cart/Payment";
 import OrderStatus from "../components/Cart/OrderStatus";
 import OrderSuccess from "../components/Cart/OrderSuccess";
 import MyOrders from "../components/Order/MyOrders";
@@ -41,17 +41,17 @@ import NotFound from "../components/NotFound";
 function Routing() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const [stripeApiKey, setStripeApiKey] = useState("");
+  // const [stripeApiKey, setStripeApiKey] = useState("");
 
-  async function getStripeApiKey() {
-    const { data } = await axios.get(
-      "/api/v1/stripeapikey"
-    );
-    setStripeApiKey(data.stripeApiKey);
-  }
-  useEffect(() => {
-    getStripeApiKey();
-  }, [dispatch]);
+  // async function getStripeApiKey() {
+  //   const { data } = await axios.get(
+  //     "/api/v1/stripeapikey"
+  //   );
+  //   setStripeApiKey(data.stripeApiKey);
+  // }
+  // useEffect(() => {
+  //   getStripeApiKey();
+  // }, [dispatch]);
 
   // always scroll to top on route/path change
   useEffect(() => {
@@ -96,7 +96,7 @@ function Routing() {
         }
       />
 
-      <Route
+      {/* <Route
         path="/process/payment"
         element={
           <ProtectedRoute>
@@ -107,7 +107,7 @@ function Routing() {
             )}
           </ProtectedRoute>
         }
-      ></Route>
+      ></Route> */}
 
       <Route path="/orders/success" element={<OrderSuccess success={true} />} />
       <Route path="/orders/failed" element={<OrderSuccess success={false} />} />

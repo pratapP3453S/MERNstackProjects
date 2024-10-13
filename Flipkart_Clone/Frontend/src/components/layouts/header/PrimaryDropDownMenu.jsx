@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { logoutUser } from "../../../redux/actions/user.actions";
 import { useSnackbar } from "notistack";
 import { userLogoutAsync } from "../../../redux/slice/userSlice.js";
+import { toast } from "react-toastify";
 
 const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown }) => {
     // console.log("Navigate calling");
     // enqueueSnackbar("Logout Successfully", { variant: "success" });
     // setTogglePrimaryDropDown(false);
-    dispatch(userLogoutAsync())
+    dispatch(userLogoutAsync());
+    toast.success("Logout Successfully")
+    setTogglePrimaryDropDown(false);
   };
 
   const navs = [

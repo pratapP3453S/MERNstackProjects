@@ -5,14 +5,17 @@ import BackdropLoader from "../Layouts/BackdropLoader";
 import MetaData from "../Layouts/MetaData";
 import {useForm} from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux";
-import { loading, loggedInUser, userSignupAsync } from "../../redux/slice/userSlice.js";
+import { userSignupAsync } from "../../redux/slice/userSlice.js";
 import { Navigate } from "react-router-dom";
 
 const Register = () => {
  
   const dispatch = useDispatch();
-  const load = useSelector(loading);
-  const user = useSelector(loggedInUser);
+  // const load = useSelector(loading);
+  // const user = useSelector(loggedInUser);
+  const { loading, isAuthenticated, isLogin, error } = useSelector(
+    (state) => state.user
+  );
 
   const {
     register,
@@ -24,8 +27,9 @@ const Register = () => {
   return (
     <>
       <MetaData title="Login | Flipkart" />
-      {load && <BackdropLoader/>}
-      {user && <Navigate to="/login"></Navigate>}
+      {loading && <BackdropLoader/>}
+      {isAuthenticated && <Navigate to={`/login`}/>}
+      {/* {user && <Navigate to="/login"></Navigate>} */}
       <main className="w-full mt-12 sm:pt-20 sm:mt-0">
         {/* <!-- row --> */}
         <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">

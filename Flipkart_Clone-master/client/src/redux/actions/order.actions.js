@@ -16,9 +16,9 @@ import {
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
-  PAYMENT_STATUS_FAIL,
-  PAYMENT_STATUS_REQUEST,
-  PAYMENT_STATUS_SUCCESS,
+  // PAYMENT_STATUS_FAIL,
+  // PAYMENT_STATUS_REQUEST,
+  // PAYMENT_STATUS_SUCCESS,
   UPDATE_ORDER_FAIL,
   UPDATE_ORDER_REQUEST,
   UPDATE_ORDER_SUCCESS,
@@ -32,7 +32,7 @@ export const newOrder = (order) => async (dispatch) => {
 
     const token = Cookies.get("token");
 
-    const response = await axios.post("/api/v1/order/new", order, {
+    const response = await axios.post("http://localhost:8000/api/v1/order/new", order, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -57,7 +57,7 @@ export const myOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get("/api/v1/orders/me", {
+    const { data } = await axios.get("http://localhost:8000/api/v1/orders/me", {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -82,7 +82,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get(`/api/v1/order/${id}`, {
+    const { data } = await axios.get(`http://localhost:8000/api/v1/order/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -102,35 +102,35 @@ export const getOrderDetails = (id) => async (dispatch) => {
 };
 
 // Get Payment Status
-export const getPaymentStatus = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: PAYMENT_STATUS_REQUEST });
-    const token = Cookies.get("token");
-    const { data } = await axios.get(`/api/v1/payment/status/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
+// export const getPaymentStatus = (id) => async (dispatch) => {
+//   try {
+//     dispatch({ type: PAYMENT_STATUS_REQUEST });
+//     const token = Cookies.get("token");
+//     const { data } = await axios.get(`/api/v1/payment/status/${id}`, {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: token,
+//       },
+//     });
 
-    dispatch({
-      type: PAYMENT_STATUS_SUCCESS,
-      payload: data.txn,
-    });
-  } catch (error) {
-    dispatch({
-      type: PAYMENT_STATUS_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+//     dispatch({
+//       type: PAYMENT_STATUS_SUCCESS,
+//       payload: data.txn,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: PAYMENT_STATUS_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
 
 // Get All Orders ---ADMIN
 export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.get("/api/v1/admin/orders", {
+    const { data } = await axios.get("http://localhost:8000/api/v1/admin/orders", {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -154,7 +154,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ORDER_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.put(`/api/v1/admin/order/${id}`, order, {
+    const { data } = await axios.put(`http://localhost:8000/api/v1/admin/order/${id}`, order, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -178,7 +178,7 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
     const token = Cookies.get("token");
-    const { data } = await axios.delete(`/api/v1/admin/order/${id}`, {
+    const { data } = await axios.delete(`http://localhost:8000/api/v1/admin/order/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,

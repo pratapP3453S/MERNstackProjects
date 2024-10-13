@@ -31,7 +31,7 @@ const getAllProducts = asyncErrorHandler(async (req, res, next) => {
 
 // Get All Products ---Product Sliders
 const getProducts = asyncErrorHandler(async (req, res, next) => {
-  const products = await Product.find();
+  const products = await Product.find({});
 
   res.status(200).json({
     success: true,

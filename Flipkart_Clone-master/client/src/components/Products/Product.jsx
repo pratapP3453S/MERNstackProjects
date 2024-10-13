@@ -46,7 +46,7 @@ const Product = ({
             draggable="false"
             className="w-full h-full object-contain"
             src={images && images[0].url}
-            alt=""
+            alt="image"
           />
         </div>
         <h2 className="text-sm mt-4 group-hover:text-primary-blue text-left">
